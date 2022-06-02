@@ -1,21 +1,18 @@
 package io.luciomarcel.catalog.admin.application.category.create;
 
-import io.luciomarcel.catalog.admin.IntegrationTest;
-import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
-import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryRepository;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.times;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import javax.swing.plaf.IconUIResource;
-import java.util.Objects;
-
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.*;
+import io.luciomarcel.catalog.admin.IntegrationTest;
+import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
+import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryRepository;
 
 @SuppressWarnings("ALL")
 @IntegrationTest

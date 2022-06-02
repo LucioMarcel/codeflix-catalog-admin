@@ -1,6 +1,37 @@
 package io.luciomarcel.catalog.admin.infrastructure.api;
 
+import static io.vavr.API.Left;
+import static io.vavr.API.Right;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.nullValue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+import java.util.Objects;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.luciomarcel.catalog.admin.ControllerTest;
 import io.luciomarcel.catalog.admin.application.category.create.CreateCategoryOutput;
 import io.luciomarcel.catalog.admin.application.category.create.CreateCategoryUseCase;
@@ -13,7 +44,6 @@ import io.luciomarcel.catalog.admin.application.category.update.UpdateCategoryOu
 import io.luciomarcel.catalog.admin.application.category.update.UpdateCategoryUseCase;
 import io.luciomarcel.catalog.admin.domain.category.Category;
 import io.luciomarcel.catalog.admin.domain.category.CategoryID;
-import io.luciomarcel.catalog.admin.domain.category.CategorySearchQuery;
 import io.luciomarcel.catalog.admin.domain.category.Pagination;
 import io.luciomarcel.catalog.admin.domain.exceptions.DomainException;
 import io.luciomarcel.catalog.admin.domain.exceptions.NotFoundException;
@@ -21,25 +51,6 @@ import io.luciomarcel.catalog.admin.domain.validation.Error;
 import io.luciomarcel.catalog.admin.domain.validation.handler.Notification;
 import io.luciomarcel.catalog.admin.infrastructure.category.models.CreateCategoryApiInput;
 import io.luciomarcel.catalog.admin.infrastructure.category.models.UpdateCategoryApiInput;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.util.List;
-import java.util.Objects;
-
-import static io.vavr.API.Left;
-import static io.vavr.API.Right;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ControllerTest(controllers = CategoryAPI.class)
 public class CategoryAPITest {
@@ -400,7 +411,7 @@ public class CategoryAPITest {
                 .andExpect(jsonPath("$.current_page", equalTo(expectedPage)))
                 .andExpect(jsonPath("$.per_page", equalTo(expectedPerPage)))
                 .andExpect(jsonPath("$.total", equalTo(expectedTotal)))
-                .andExpect(jsonPath("$.items", equalTo(expectedPage)))
+                .andExpect(jsonPath("$.items", equalTo(expectedItemsCount)))
                 .andExpect(jsonPath("$.items[0].id", equalTo(aCategory.getId().getValue())))
                 .andExpect(jsonPath("$.items[0].name", equalTo(aCategory.getName())))
                 .andExpect(jsonPath("$.items[0].description", equalTo(aCategory.getDescription())))

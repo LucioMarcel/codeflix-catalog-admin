@@ -1,24 +1,22 @@
 package io.luciomarcel.catalog.admin.application.category.retrieve.get;
 
-import io.luciomarcel.catalog.admin.IntegrationTest;
-import io.luciomarcel.catalog.admin.domain.category.Category;
-import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
-import io.luciomarcel.catalog.admin.domain.category.CategoryID;
-import io.luciomarcel.catalog.admin.domain.exceptions.DomainException;
-import io.luciomarcel.catalog.admin.domain.exceptions.NotFoundException;
-import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryJpaEntity;
-import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryRepository;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doThrow;
+
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import java.util.Arrays;
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
+import io.luciomarcel.catalog.admin.IntegrationTest;
+import io.luciomarcel.catalog.admin.domain.category.Category;
+import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
+import io.luciomarcel.catalog.admin.domain.category.CategoryID;
+import io.luciomarcel.catalog.admin.domain.exceptions.NotFoundException;
+import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryJpaEntity;
+import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryRepository;
 
 @IntegrationTest
 @SuppressWarnings("ALL")

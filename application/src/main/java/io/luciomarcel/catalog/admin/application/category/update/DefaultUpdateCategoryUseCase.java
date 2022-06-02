@@ -1,17 +1,15 @@
 package io.luciomarcel.catalog.admin.application.category.update;
 
+import java.util.Objects;
+import java.util.function.Supplier;
+
 import io.luciomarcel.catalog.admin.domain.category.Category;
 import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
 import io.luciomarcel.catalog.admin.domain.category.CategoryID;
-import io.luciomarcel.catalog.admin.domain.exceptions.DomainException;
 import io.luciomarcel.catalog.admin.domain.exceptions.NotFoundException;
-import io.luciomarcel.catalog.admin.domain.validation.Error;
 import io.luciomarcel.catalog.admin.domain.validation.handler.Notification;
 import io.vavr.API;
 import io.vavr.control.Either;
-
-import java.util.Objects;
-import java.util.function.Supplier;
 
 public class DefaultUpdateCategoryUseCase extends UpdateCategoryUseCase{
 

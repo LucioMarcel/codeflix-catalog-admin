@@ -1,10 +1,9 @@
 package io.luciomarcel.catalog.admin.domain.category;
 
-import io.luciomarcel.catalog.admin.domain.Identifier;
-
-import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
+
+import io.luciomarcel.catalog.admin.domain.Identifier;
 
 public class CategoryID extends Identifier {
     private final String value;

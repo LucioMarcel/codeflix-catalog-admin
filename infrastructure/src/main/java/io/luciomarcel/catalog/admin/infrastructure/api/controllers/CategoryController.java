@@ -77,15 +77,15 @@ public class CategoryController implements CategoryAPI {
             final String sort,
             final String direction
     ) {
-        return this.listCategoriesUseCase
-                .execute(new CategorySearchQuery(page,perPage, search,sort,direction));
+        return CategoryApiPresenter.present(
+                listCategoriesUseCase.execute(new CategorySearchQuery(page,perPage, search,sort,direction)));
     }
 
     @Override
     public CategoryApiOutput getById(final String id) {
         //return CategoryApiPresenter.present(this.getCategoryByIdUseCase.execute(id));
         //mesama coisa da linha acima, só que autilizando a propriedade da classe utilitária ao invés do método/
-        return CategoryApiPresenter.present.apply(this.getCategoryByIdUseCase.execute(id));
+        return CategoryApiPresenter.present(this.getCategoryByIdUseCase.execute(id));
     }
 
     @Override

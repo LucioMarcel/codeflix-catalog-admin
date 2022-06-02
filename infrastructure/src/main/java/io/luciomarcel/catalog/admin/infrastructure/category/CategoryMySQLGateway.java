@@ -1,21 +1,22 @@
 package io.luciomarcel.catalog.admin.infrastructure.category;
 
-import io.luciomarcel.catalog.admin.domain.category.*;
-import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryJpaEntity;
-import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryRepository;
-import io.luciomarcel.catalog.admin.infrastructure.utils.SpecificationUtils;
+import static io.luciomarcel.catalog.admin.infrastructure.utils.SpecificationUtils.like;
+
+import java.util.Optional;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.Optional;
-
-import static io.luciomarcel.catalog.admin.infrastructure.utils.SpecificationUtils.like;
+import io.luciomarcel.catalog.admin.domain.category.Category;
+import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
+import io.luciomarcel.catalog.admin.domain.category.CategoryID;
+import io.luciomarcel.catalog.admin.domain.category.CategorySearchQuery;
+import io.luciomarcel.catalog.admin.domain.category.Pagination;
+import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryJpaEntity;
+import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryRepository;
+import io.luciomarcel.catalog.admin.infrastructure.utils.SpecificationUtils;
 
 @Service
 public class CategoryMySQLGateway implements CategoryGateway {
