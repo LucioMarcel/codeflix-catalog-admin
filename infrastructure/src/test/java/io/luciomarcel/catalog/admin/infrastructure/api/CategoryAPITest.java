@@ -51,7 +51,6 @@ import io.luciomarcel.catalog.admin.domain.validation.Error;
 import io.luciomarcel.catalog.admin.domain.validation.handler.Notification;
 import io.luciomarcel.catalog.admin.infrastructure.category.models.CreateCategoryRequest;
 import io.luciomarcel.catalog.admin.infrastructure.category.models.UpdateCategoryRequest;
-import io.luciomarcel.catalog.admin.infrastructure.category.presenters.CategoryApiPresenter;
 
 @ControllerTest(controllers = CategoryAPI.class)
 public class CategoryAPITest {
@@ -379,18 +378,20 @@ public class CategoryAPITest {
     }
 
     @Test
-    public void givenAValidParams_whenCallsListCategories_thenShouldReturnCategories() throws  Exception {
+    public void givenValidParams_whenCallsListCategories_thenShouldReturnCategories() throws  Exception {
+        // given
         final var aCategory = Category.newCategory("Movies", null, true);
+        
         final var expectedPage = 0;
         final var expectedPerPage = 10;
-        final var expectedTerms = "movies";
+        final var expectedTerms = "Movies";
         final var expectedSort = "description";
         final var expectedDirection = "desc";
         final var expectedItemsCount = 1;
         final var expectedTotal = 1;
 
         final var expectedItems = List.of(CategoryListOutput.from(aCategory));
-        
+
         when(listCategoriesUseCase.execute(any()))
                 .thenReturn(new Pagination<>(expectedPage, expectedPerPage, expectedTotal, expectedItems));
 
@@ -399,7 +400,7 @@ public class CategoryAPITest {
                 .queryParam("page", String.valueOf(expectedPage))
                 .queryParam("perPage", String.valueOf(expectedPerPage))
                 .queryParam("sort", expectedSort)
-                .queryParam("dir", expectedDirection)
+                .queryParam("direction", expectedDirection)
                 .queryParam("search", expectedTerms)
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -417,8 +418,8 @@ public class CategoryAPITest {
                 .andExpect(jsonPath("$.items[0].name", equalTo(aCategory.getName())))
                 .andExpect(jsonPath("$.items[0].description", equalTo(aCategory.getDescription())))
                 .andExpect(jsonPath("$.items[0].is_active", equalTo(aCategory.isActive())))
-                .andExpect(jsonPath("$.items[0].created_at", equalTo(aCategory.getCreatedAt().toString())));
-              //  .andExpect(jsonPath("$.items[0].deleted_at", equalTo(aCategory.getDeletedAt())));
+                .andExpect(jsonPath("$.items[0].created_at", equalTo(aCategory.getCreatedAt().toString())))
+                .andExpect(jsonPath("$.items[0].deleted_at", equalTo(aCategory.getDeletedAt())));
 
         verify(listCategoriesUseCase, times(1)).execute(argThat(query ->
             Objects.equals(expectedPage, query.page())

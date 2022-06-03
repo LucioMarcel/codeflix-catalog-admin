@@ -33,7 +33,6 @@ public class CategoryController implements CategoryAPI {
     private final GetCategoryByIdUseCase getCategoryByIdUseCase;
     private UpdateCategoryUseCase updateCategoryUseCase;
     private DeleteCategoryUseCase deleteCategoryUseCase;
-
     private ListCategoriesUseCase listCategoriesUseCase;
 
     public CategoryController(
@@ -79,8 +78,8 @@ public class CategoryController implements CategoryAPI {
             final String sort,
             final String direction
     ) {
-        return listCategoriesUseCase.execute(new CategorySearchQuery(page,perPage, search,sort,direction))
-        .map(CategoryApiPresenter::present);
+        return listCategoriesUseCase.execute(new CategorySearchQuery(page, perPage, search, sort, direction))
+                .map(CategoryApiPresenter::present);
     }
 
     public CategoryResponse getById(final String id) {

@@ -33,7 +33,7 @@ public interface CategoryApiPresenter {
             output.deletedAt()
     );
 
-    public static CategoryListResponse present(final CategoryListOutput output){
+    static CategoryListResponse present(final CategoryListOutput output){
         return new CategoryListResponse(
                 output.id().getValue(),
                 output.name(),
