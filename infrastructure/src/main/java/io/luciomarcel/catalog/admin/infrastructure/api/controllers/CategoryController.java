@@ -1,5 +1,12 @@
 package io.luciomarcel.catalog.admin.infrastructure.api.controllers;
 
+import java.net.URI;
+import java.util.Objects;
+import java.util.function.Function;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.luciomarcel.catalog.admin.application.category.create.CreateCategoryCommand;
 import io.luciomarcel.catalog.admin.application.category.create.CreateCategoryOutput;
 import io.luciomarcel.catalog.admin.application.category.create.CreateCategoryUseCase;
@@ -13,16 +20,11 @@ import io.luciomarcel.catalog.admin.domain.category.CategorySearchQuery;
 import io.luciomarcel.catalog.admin.domain.category.Pagination;
 import io.luciomarcel.catalog.admin.domain.validation.handler.Notification;
 import io.luciomarcel.catalog.admin.infrastructure.api.CategoryAPI;
-import io.luciomarcel.catalog.admin.infrastructure.category.models.CategoryApiOutput;
-import io.luciomarcel.catalog.admin.infrastructure.category.models.CreateCategoryApiInput;
-import io.luciomarcel.catalog.admin.infrastructure.category.models.UpdateCategoryApiInput;
+import io.luciomarcel.catalog.admin.infrastructure.category.models.CategoryListResponse;
+import io.luciomarcel.catalog.admin.infrastructure.category.models.CategoryResponse;
+import io.luciomarcel.catalog.admin.infrastructure.category.models.CreateCategoryRequest;
+import io.luciomarcel.catalog.admin.infrastructure.category.models.UpdateCategoryRequest;
 import io.luciomarcel.catalog.admin.infrastructure.category.presenters.CategoryApiPresenter;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.net.URI;
-import java.util.Objects;
-import java.util.function.Function;
 
 @RestController
 public class CategoryController implements CategoryAPI {
@@ -49,7 +51,7 @@ public class CategoryController implements CategoryAPI {
     }
 
     @Override
-    public ResponseEntity<?> createCategory(CreateCategoryApiInput input) {
+    public ResponseEntity<?> createCategory(CreateCategoryRequest input) {
         final var aCommand = CreateCategoryCommand.with(
                 input.name(),
                 input.description(),
@@ -70,26 +72,25 @@ public class CategoryController implements CategoryAPI {
     }
 
     @Override
-    public Pagination<?> listCategories(
+    public Pagination<CategoryListResponse> listCategories(
             final String search,
             final int page,
             final int perPage,
             final String sort,
             final String direction
     ) {
-        return CategoryApiPresenter.present(
-                listCategoriesUseCase.execute(new CategorySearchQuery(page,perPage, search,sort,direction)));
+        return listCategoriesUseCase.execute(new CategorySearchQuery(page,perPage, search,sort,direction))
+        .map(CategoryApiPresenter::present);
     }
 
-    @Override
-    public CategoryApiOutput getById(final String id) {
+    public CategoryResponse getById(final String id) {
         //return CategoryApiPresenter.present(this.getCategoryByIdUseCase.execute(id));
         //mesama coisa da linha acima, só que autilizando a propriedade da classe utilitária ao invés do método/
         return CategoryApiPresenter.present(this.getCategoryByIdUseCase.execute(id));
     }
 
     @Override
-    public ResponseEntity<?> updateById(final String id, final UpdateCategoryApiInput input) {
+    public ResponseEntity<?> updateById(final String id, final UpdateCategoryRequest input) {
         final var aCommand = UpdateCategoryCommand.with(
                 id,
                 input.name(),
