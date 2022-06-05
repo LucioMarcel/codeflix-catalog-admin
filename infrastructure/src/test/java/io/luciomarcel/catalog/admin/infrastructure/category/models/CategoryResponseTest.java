@@ -1,15 +1,13 @@
 package io.luciomarcel.catalog.admin.infrastructure.category.models;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.json.JacksonTester;
 
-import io.luciomarcel.catalog.admin.infrastructure.JacksonTest;
+import io.luciomarcel.catalog.admin.JacksonTest;
 
 @JacksonTest
 public class CategoryResponseTest {
@@ -22,7 +20,7 @@ public class CategoryResponseTest {
         final var expectedId = "123";
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assitida";
-        final var isActive = false;
+        final var expectedIsActive = false;
         final var expectedCreatedAt = Instant.now();
         final var expectedUpdatedAt = Instant.now();
         final var expectedDeletedAt = Instant.now();
@@ -31,7 +29,7 @@ public class CategoryResponseTest {
                 expectedId,
                 expectedName,
                 expectedDescription,
-                isActive,
+                expectedIsActive,
                 expectedCreatedAt,
                 expectedUpdatedAt,
                 expectedDeletedAt);
@@ -42,11 +40,10 @@ public class CategoryResponseTest {
                 .hasJsonPathValue("$.id", expectedId)
                 .hasJsonPathValue("$.name", expectedName)
                 .hasJsonPathValue("$.description", expectedDescription)
-                .hasJsonPathValue("$.is_active", isActive)
+                .hasJsonPathValue("$.is_active", expectedIsActive)
                 .hasJsonPathValue("$.created_at", expectedCreatedAt.toString())
-                .hasJsonPathValue("$.updated_at", expectedUpdatedAt.toString())
-                .hasJsonPathValue("$.deleted_at", expectedDeletedAt.toString());
-
+                .hasJsonPathValue("$.deleted_at", expectedDeletedAt.toString())
+                .hasJsonPathValue("$.updated_at", expectedUpdatedAt.toString());
     }
 
     @Test
@@ -54,11 +51,11 @@ public class CategoryResponseTest {
         final var expectedId = "123";
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assitida";
-        final var isActive = false;
+        final var expectedIsActive = false;
         final var expectedCreatedAt = Instant.now();
         final var expectedUpdatedAt = Instant.now();
         final var expectedDeletedAt = Instant.now();
-
+                
         final var json = """
         {
                 "id": "%s",
@@ -66,14 +63,14 @@ public class CategoryResponseTest {
                 "description": "%s",
                 "is_active": %s,
                 "created_at": "%s",
-                "updated_at": "%s",
-                "deleted_at": "%s"
+                "deleted_at": "%s",
+                "updated_at": "%s"
         }
         """.formatted(
                 expectedId, 
                 expectedName,
                 expectedDescription,
-                isActive,
+                expectedIsActive,
                 expectedCreatedAt.toString(),
                 expectedDeletedAt.toString(),
                 expectedUpdatedAt.toString()
@@ -85,10 +82,10 @@ public class CategoryResponseTest {
                 .hasFieldOrPropertyWithValue("id", expectedId)
                 .hasFieldOrPropertyWithValue("name", expectedName)
                 .hasFieldOrPropertyWithValue("description", expectedDescription)
-                .hasFieldOrPropertyWithValue("active", isActive)
+                .hasFieldOrPropertyWithValue("active", expectedIsActive)
                 .hasFieldOrPropertyWithValue("createdAt", expectedCreatedAt)
-                .hasFieldOrPropertyWithValue("updatedAt", expectedUpdatedAt)
-                .hasFieldOrPropertyWithValue("deletedAt", expectedDeletedAt);
+                .hasFieldOrPropertyWithValue("deletedAt", expectedDeletedAt)
+                .hasFieldOrPropertyWithValue("updatedAt", expectedUpdatedAt);
     }
 
 }

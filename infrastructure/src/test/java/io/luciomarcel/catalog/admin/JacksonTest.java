@@ -1,4 +1,4 @@
-package io.luciomarcel.catalog.admin.infrastructure;
+package io.luciomarcel.catalog.admin;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -16,7 +16,7 @@ import io.luciomarcel.catalog.admin.infrastructure.configuration.ObjectMapperCon
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-@ActiveProfiles("test")
+@ActiveProfiles("test-integration")
 @JsonTest(includeFilters = {
     @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = ObjectMapperConfig.class)
 })

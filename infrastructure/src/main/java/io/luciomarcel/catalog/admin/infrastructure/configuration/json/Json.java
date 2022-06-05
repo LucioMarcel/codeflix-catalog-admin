@@ -5,7 +5,6 @@ import java.util.concurrent.Callable;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.SerializationFeature;
