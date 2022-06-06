@@ -44,9 +44,9 @@ import io.luciomarcel.catalog.admin.application.category.update.UpdateCategoryOu
 import io.luciomarcel.catalog.admin.application.category.update.UpdateCategoryUseCase;
 import io.luciomarcel.catalog.admin.domain.category.Category;
 import io.luciomarcel.catalog.admin.domain.category.CategoryID;
-import io.luciomarcel.catalog.admin.domain.category.Pagination;
 import io.luciomarcel.catalog.admin.domain.exceptions.DomainException;
 import io.luciomarcel.catalog.admin.domain.exceptions.NotFoundException;
+import io.luciomarcel.catalog.admin.domain.pagination.Pagination;
 import io.luciomarcel.catalog.admin.domain.validation.Error;
 import io.luciomarcel.catalog.admin.domain.validation.handler.Notification;
 import io.luciomarcel.catalog.admin.infrastructure.category.models.CreateCategoryRequest;

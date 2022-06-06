@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import io.luciomarcel.catalog.admin.domain.category.Pagination;
+import io.luciomarcel.catalog.admin.domain.pagination.Pagination;
 import io.luciomarcel.catalog.admin.infrastructure.category.models.CategoryListResponse;
 import io.luciomarcel.catalog.admin.infrastructure.category.models.CategoryResponse;
 import io.luciomarcel.catalog.admin.infrastructure.category.models.CreateCategoryRequest;

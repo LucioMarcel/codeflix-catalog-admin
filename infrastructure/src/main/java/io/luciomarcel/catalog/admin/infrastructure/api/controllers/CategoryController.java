@@ -16,8 +16,8 @@ import io.luciomarcel.catalog.admin.application.category.retrieve.list.ListCateg
 import io.luciomarcel.catalog.admin.application.category.update.UpdateCategoryCommand;
 import io.luciomarcel.catalog.admin.application.category.update.UpdateCategoryOutput;
 import io.luciomarcel.catalog.admin.application.category.update.UpdateCategoryUseCase;
-import io.luciomarcel.catalog.admin.domain.category.CategorySearchQuery;
-import io.luciomarcel.catalog.admin.domain.category.Pagination;
+import io.luciomarcel.catalog.admin.domain.pagination.SearchQuery;
+import io.luciomarcel.catalog.admin.domain.pagination.Pagination;
 import io.luciomarcel.catalog.admin.domain.validation.handler.Notification;
 import io.luciomarcel.catalog.admin.infrastructure.api.CategoryAPI;
 import io.luciomarcel.catalog.admin.infrastructure.category.models.CategoryListResponse;
@@ -78,7 +78,7 @@ public class CategoryController implements CategoryAPI {
             final String sort,
             final String direction
     ) {
-        return listCategoriesUseCase.execute(new CategorySearchQuery(page, perPage, search, sort, direction))
+        return listCategoriesUseCase.execute(new SearchQuery(page, perPage, search, sort, direction))
                 .map(CategoryApiPresenter::present);
     }
 

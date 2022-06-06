@@ -2,6 +2,9 @@ package io.luciomarcel.catalog.admin.domain.category;
 
 import java.util.Optional;
 
+import io.luciomarcel.catalog.admin.domain.pagination.SearchQuery;
+import io.luciomarcel.catalog.admin.domain.pagination.Pagination;
+
 public interface CategoryGateway {
 
     Category create(Category aCategory);
@@ -12,5 +15,5 @@ public interface CategoryGateway {
 
     Category update(Category aCategory);
 
-    Pagination<Category> findAll(CategorySearchQuery aQuery);
+    Pagination<Category> findAll(SearchQuery aQuery);
 }

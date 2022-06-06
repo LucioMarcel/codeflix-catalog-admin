@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import io.luciomarcel.catalog.admin.domain.category.Category;
 import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
 import io.luciomarcel.catalog.admin.domain.category.CategoryID;
-import io.luciomarcel.catalog.admin.domain.category.CategorySearchQuery;
-import io.luciomarcel.catalog.admin.domain.category.Pagination;
+import io.luciomarcel.catalog.admin.domain.pagination.SearchQuery;
+import io.luciomarcel.catalog.admin.domain.pagination.Pagination;
 import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryJpaEntity;
 import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryRepository;
 import io.luciomarcel.catalog.admin.infrastructure.utils.SpecificationUtils;
@@ -52,7 +52,7 @@ public class CategoryMySQLGateway implements CategoryGateway {
     }
 
     @Override
-    public Pagination<Category> findAll(final CategorySearchQuery aQuery) {
+    public Pagination<Category> findAll(final SearchQuery aQuery) {
         // Paginação
         final var page= PageRequest.of(
                 aQuery.page(),
