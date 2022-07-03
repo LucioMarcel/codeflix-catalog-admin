@@ -2,6 +2,8 @@ package io.luciomarcel.catalog.admin.infrastructure.category;
 
 import static io.luciomarcel.catalog.admin.infrastructure.utils.SpecificationUtils.like;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
@@ -12,8 +14,8 @@ import org.springframework.stereotype.Service;
 import io.luciomarcel.catalog.admin.domain.category.Category;
 import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
 import io.luciomarcel.catalog.admin.domain.category.CategoryID;
-import io.luciomarcel.catalog.admin.domain.pagination.SearchQuery;
 import io.luciomarcel.catalog.admin.domain.pagination.Pagination;
+import io.luciomarcel.catalog.admin.domain.pagination.SearchQuery;
 import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryJpaEntity;
 import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryRepository;
 import io.luciomarcel.catalog.admin.infrastructure.utils.SpecificationUtils;
@@ -82,5 +84,11 @@ public class CategoryMySQLGateway implements CategoryGateway {
 
     private Category save(final Category aCategory) {
         return this.repository.save(CategoryJpaEntity.from(aCategory)).toAggregate();
+    }
+
+    @Override
+    public List<CategoryID> existsByIds(Iterable<CategoryID> ids) {
+        // TODO: Implementar quando chegar na camada de infraestrutura de Genre
+        return Collections.emptyList();
     }
 }

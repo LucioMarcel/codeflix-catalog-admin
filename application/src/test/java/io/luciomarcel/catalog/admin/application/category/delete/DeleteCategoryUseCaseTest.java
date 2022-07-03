@@ -1,22 +1,24 @@
 package io.luciomarcel.catalog.admin.application.category.delete;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
+import io.luciomarcel.catalog.admin.application.UseCaseTest;
 import io.luciomarcel.catalog.admin.domain.category.Category;
 import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
 import io.luciomarcel.catalog.admin.domain.category.CategoryID;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
-
-@ExtendWith(MockitoExtension.class)
-public class DeleteCategoryUseCaseTest {
+public class DeleteCategoryUseCaseTest extends UseCaseTest{
 
     @InjectMocks
     private DefaultDeleteCategoryUsecase useCase;
@@ -24,9 +26,9 @@ public class DeleteCategoryUseCaseTest {
     @Mock
     private CategoryGateway categoryGateway;
 
-    @BeforeEach
-    void cleanUp() {
-        Mockito.reset(categoryGateway);
+    @Override
+    protected List<Object> getMocks() {
+        return List.of(categoryGateway);
     }
 
     @Test

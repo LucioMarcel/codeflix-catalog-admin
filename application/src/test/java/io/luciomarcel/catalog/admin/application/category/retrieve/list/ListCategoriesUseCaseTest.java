@@ -1,26 +1,22 @@
 package io.luciomarcel.catalog.admin.application.category.retrieve.list;
 
-import io.luciomarcel.catalog.admin.domain.category.Category;
-import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
-import io.luciomarcel.catalog.admin.domain.pagination.SearchQuery;
-import io.luciomarcel.catalog.admin.domain.pagination.Pagination;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
-@ExtendWith(MockitoExtension.class)
-public class ListCategoriesUseCaseTest {
+import io.luciomarcel.catalog.admin.application.UseCaseTest;
+import io.luciomarcel.catalog.admin.domain.category.Category;
+import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
+import io.luciomarcel.catalog.admin.domain.pagination.Pagination;
+import io.luciomarcel.catalog.admin.domain.pagination.SearchQuery;
+
+public class ListCategoriesUseCaseTest extends UseCaseTest{
 
     @InjectMocks
     private DefaultListCategoriesUsecase useCase;
@@ -28,9 +24,9 @@ public class ListCategoriesUseCaseTest {
     @Mock
     private CategoryGateway categoryGateway;
 
-    @BeforeEach
-    void cleanUp(){
-        reset(categoryGateway);
+    @Override
+    protected List<Object> getMocks() {
+        return List.of(categoryGateway);
     }
 
     @Test

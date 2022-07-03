@@ -1,14 +1,21 @@
 package io.luciomarcel.catalog.admin.application;
 
-import org.junit.jupiter.api.Test;
+import java.util.List;
+
+import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class UseCaseTest {
+public abstract class UseCaseTest implements BeforeEachCallback {
 
-    @Test
-    public void  testCreateUseCase() {
-
+    @Override
+    public void beforeEach(ExtensionContext context) throws Exception {
+        Mockito.reset(getMocks().toArray());
     }
+
+    protected abstract List<Object> getMocks();
+    
 }

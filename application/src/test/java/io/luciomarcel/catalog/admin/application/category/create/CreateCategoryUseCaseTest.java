@@ -1,24 +1,25 @@
 package io.luciomarcel.catalog.admin.application.category.create;
 
-import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Objects;
-
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
-public class CreateCategoryUseCaseTest {
+import java.util.List;
+import java.util.Objects;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
+import io.luciomarcel.catalog.admin.application.UseCaseTest;
+import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
+
+public class CreateCategoryUseCaseTest extends UseCaseTest {
 
     @InjectMocks
     private DefaultCreateCategoryUseCase useCase;
@@ -26,9 +27,9 @@ public class CreateCategoryUseCaseTest {
     @Mock
     private CategoryGateway categoryGateway;
 
-    @BeforeEach
-    void cleanUp() {
-        Mockito.reset(categoryGateway);
+    @Override
+    protected List<Object> getMocks() {
+        return List.of(categoryGateway);
     }
 
     @Test
