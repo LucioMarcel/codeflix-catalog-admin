@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import io.luciomarcel.catalog.admin.domain.category.CategoryID;
 
 @Entity
-@Table(name = "genre_categories")
+@Table(name = "genres_categories")
 public class GenreCategoryJpaEntity {
 
     @EmbeddedId

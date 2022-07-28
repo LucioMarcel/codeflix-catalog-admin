@@ -9,7 +9,7 @@ import java.util.Optional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import io.luciomarcel.catalog.admin.domain.category.Category;
 import io.luciomarcel.catalog.admin.domain.category.CategoryGateway;
@@ -20,7 +20,7 @@ import io.luciomarcel.catalog.admin.infrastructure.category.persistence.Category
 import io.luciomarcel.catalog.admin.infrastructure.category.persistence.CategoryRepository;
 import io.luciomarcel.catalog.admin.infrastructure.utils.SpecificationUtils;
 
-@Service
+@Component
 public class CategoryMySQLGateway implements CategoryGateway {
 
     private final CategoryRepository repository;

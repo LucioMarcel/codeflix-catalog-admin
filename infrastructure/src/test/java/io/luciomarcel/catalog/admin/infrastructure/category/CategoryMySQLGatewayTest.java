@@ -14,11 +14,18 @@ import java.util.List;
 
 @MySQLGatewayTest
 public class CategoryMySQLGatewayTest {
+
     @Autowired
     private CategoryMySQLGateway categoryGateway;
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Test
+    public void testDepenciesInjected(){
+        Assertions.assertNotNull(categoryGateway);
+        Assertions.assertNotNull(categoryRepository);
+    }
 
     @Test
     public void givenAValidCategory_whenCallsCreate_shouldReturnANewCategory(){

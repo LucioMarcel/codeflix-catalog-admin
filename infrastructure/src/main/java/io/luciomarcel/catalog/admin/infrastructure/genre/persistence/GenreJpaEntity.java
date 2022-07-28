@@ -5,10 +5,12 @@ import static javax.persistence.FetchType.EAGER;
 
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,6 +22,7 @@ import io.luciomarcel.catalog.admin.domain.genre.GenreID;
 @Table(name = "genres")
 public class GenreJpaEntity {
 
+    @Id
     @Column(name = "id", nullable = false)
     private String id;
 
@@ -81,13 +84,17 @@ public class GenreJpaEntity {
             GenreID.from(getId()),
             getName(),
             isActive(),
-            getCategories().stream()
-                .map(it -> CategoryID.from(it.getId().getCategoryId()))
-                .toList(),
+            getCategoriesIDs(),
             getCreatedAt(),
             getUpdatedAt(),
             getDeletedAt()
         );
+    }
+
+    public  List<CategoryID> getCategoriesIDs() {
+        return getCategories().stream()
+            .map(it -> CategoryID.from(it.getId().getCategoryId()))
+            .toList();
     }
 
     public String getId() {
